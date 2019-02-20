@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Menu;
 use App\Rules\RestoCategoryValidate;
+use App\Services\MenuService;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function create(Request $request)
+    public function index($id)
+    {
+        $restau_id = $id ;
+        $service =new MenuService;
+        $menus= $service->GetMenuWithCategory($id);
+        return view('menu.index',compact('menus','restau_id'));
+    }
+    public function store(Request $request)
     {
 
         $data = $this->validate($request, [

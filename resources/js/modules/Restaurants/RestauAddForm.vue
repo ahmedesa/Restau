@@ -6,8 +6,8 @@
       <input type="text" class="form-control" name="name" placeholder="Enter restuarant name" v-model="restau.name">
     </div>
     <div class="form-group">
-      <label for="address">Address</label>
-      <input type="text" class="form-control" name="address" placeholder="Enter restuarant address" v-model="restau.address">
+      <label for="location">location</label>
+      <input type="text" class="form-control" name="location" placeholder="Enter restuarant location" v-model="restau.location">
     </div>
     <div class="form-group">
       <label for="tables">Number of tables</label>
@@ -31,16 +31,15 @@ export default {
     emptyRestau() {
       return {
         name: "",
-        address: "",
+        location: "",
         tables: 0
       }
     },
     handelAddButton() {
-    	this.$emit('addRestauEvent' , this.restau);
+      this.$emit('addRestauEvent', this.restau);
     },
     handelCancelButton() {
-      this.$modal.hide('add-new-restau');
-
+      this.$emit('cancleModelEvent');
     }
   }
 }

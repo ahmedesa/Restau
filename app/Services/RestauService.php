@@ -3,7 +3,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 
-class RestoService
+class RestauService
 {
 
     public function UserRestoAndTables()

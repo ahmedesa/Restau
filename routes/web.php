@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('restaus', 'ResturantController@index')->name('restau');
+Route::get('restau/menu/{id}', 'MenuController@index')->name('restau.menu');

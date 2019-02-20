@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\MenuService;
-use App\Services\RestoService;
+use App\Services\RestauService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(MenuService $service ,RestoService $restService)
+    public function index(MenuService $service ,RestauService $restService)
     {
         
         $restau_id = 1;

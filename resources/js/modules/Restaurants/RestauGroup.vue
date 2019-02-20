@@ -1,24 +1,26 @@
 <template>
   <div class="restau-group__wrapper mb-5">
     <div class="row">
-      <div class="col-md-4 mb-4" v-for="restau in restaus" :key="restau.id">
+      <div class="col-md-4 mb-4" v-for="restau in localRestaus" :key="restau.id">
         <card-component>
           <template slot="title">{{restau.name}}</template>
-          <template slot="body">{{restau.location}} </template>
+          <template slot="body">
+          {{restau.location}}
+          <br>
+          <a v-bind:href="restau.slug" class="card-link">Show Menu</a>
+          </template>
         </card-component>
       </div>
       <div class="col-md-4" v-if="showAddForm">
         <card-component>
           <template slot="title">Add new Restaurant</template>
           <template slot="body">
-            <span @click="handeLaAddNewRestau">+</span>
+            <span class="add_new_retau" @click="handeLaAddNewRestau">+</span>
           </template>
         </card-component>
         <modal height="auto" name="add-new-restau">
           <div class="p-1">
-            <restau-add-form
-			@addRestauEvent="handelSaveRestau"
-            ></restau-add-form>
+            <restau-add-form @addRestauEvent="handelSaveRestau" @cancleModelEvent="cancleModel"></restau-add-form>
           </div>
         </modal>
       </div>
@@ -34,7 +36,7 @@ export default {
   props: ['restaus'],
   data() {
     return {
-
+      localRestaus: {}
     }
   },
   computed: {
@@ -42,17 +44,32 @@ export default {
       return (this.restaus.length < 3) ? true : false;
     }
   },
+  created() {
+    this.localRestaus = this.restaus;
+  },
   methods: {
+    cancleModel() {
+      this.$modal.hide('add-new-restau');
+
+    },
     handeLaAddNewRestau() {
       this.$modal.show('add-new-restau');
 
     },
-    handelSaveRestau(restauData){
-    console.log(restauData);
+    handelSaveRestau(restauData) {
+      var url = window.Laravel.basePath + '/api/restau/create';
+      window.axios.post(url, restauData).then(response => {
+      	this.cancleModel();
+        this.localRestaus.unshift(response.data);
+      })
     }
   }
 }
 
 </script>
-<style lang="css" scoped>
+<style>
+.add_new_retau {
+  cursor: pointer;
+}
+
 </style>

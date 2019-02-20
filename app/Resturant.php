@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Resturant extends Model
 {
     protected $guarded = [];
+    protected $appends = ['slug'];
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+    public function getSlugAttribute()
+    {
+    	return route('restau.menu',$this->id);
     }
 
 }
