@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function resturants()
+    {
+        return $this->hasMany(Resturant::class,'owner_id')->orderBy('name','asc');
+    }
 }
