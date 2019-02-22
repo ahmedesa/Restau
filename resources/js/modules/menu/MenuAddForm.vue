@@ -26,6 +26,8 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">save</button>
+      <i v-if="loading" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+
     </form>
   </div>
 </template>
@@ -40,7 +42,8 @@ export default {
   data() {
     return {
       food: this.emptyFoodItem() ,
-      validation: new Validation()
+      validation: new Validation(),
+      loading :false,
     }
   },
   methods: {
@@ -53,6 +56,7 @@ export default {
       }
     },
     handelSubmit() {
+      this.loading =true;
       let Data = this.food;
       Data.restau_id = this.restau_id
       var url = window.Laravel.basePath + '/api/item/create';
@@ -60,6 +64,7 @@ export default {
         .then(response => {
           this.$emit('newItemAdded', response.data, Data.category);
           this.food = this.emptyFoodItem(); 
+          this.loading = false;
 
         })
         .catch(error => {

@@ -5,9 +5,9 @@
         <card-component>
           <template slot="title">{{restau.name}}</template>
           <template slot="body">
-          {{restau.location}}
-          <br>
-          <a v-bind:href="restau.slug" class="card-link">Show Menu</a>
+            {{restau.location}}
+            <br>
+            <a v-bind:href="restau.slug" class="card-link">Show Menu</a>
           </template>
         </card-component>
       </div>
@@ -15,7 +15,11 @@
         <card-component>
           <template slot="title">Add new Restaurant</template>
           <template slot="body">
-            <span class="add_new_retau" @click="handeLaAddNewRestau">+</span>
+            <div class="add_new_retau">
+              <span @click="handeLaAddNewRestau">
+                <i class="fa fa-plus-circle fa-3x pointer"></i>
+              </span>
+            </div>
           </template>
         </card-component>
         <modal height="auto" name="add-new-restau">
@@ -41,7 +45,7 @@ export default {
   },
   computed: {
     showAddForm() {
-      return (this.restaus.length < 3) ? true : false;
+      return (this.restaus.length < 5) ? true : false;
     }
   },
   created() {
@@ -59,7 +63,7 @@ export default {
     handelSaveRestau(restauData) {
       var url = window.Laravel.basePath + '/api/restau/create';
       window.axios.post(url, restauData).then(response => {
-      	this.cancleModel();
+        this.cancleModel();
         this.localRestaus.unshift(response.data);
       })
     }
@@ -70,6 +74,9 @@ export default {
 <style>
 .add_new_retau {
   cursor: pointer;
+  text-align: center;
+
+
 }
 
 </style>

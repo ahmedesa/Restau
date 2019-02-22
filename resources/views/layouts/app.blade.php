@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/font-awesome.css') }}"> 
 
     <!-- Styles -->
     <style type="text/css">

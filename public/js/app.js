@@ -1875,6 +1875,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1888,7 +1892,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     showAddForm: function showAddForm() {
-      return this.restaus.length < 3 ? true : false;
+      return this.restaus.length < 5 ? true : false;
     }
   },
   created: function created() {
@@ -1959,6 +1963,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1970,7 +1976,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       food: this.emptyFoodItem(),
-      validation: new _utils_Validation_js__WEBPACK_IMPORTED_MODULE_1__["default"]()
+      validation: new _utils_Validation_js__WEBPACK_IMPORTED_MODULE_1__["default"](),
+      loading: false
     };
   },
   methods: {
@@ -1985,6 +1992,7 @@ __webpack_require__.r(__webpack_exports__);
     handelSubmit: function handelSubmit() {
       var _this = this;
 
+      this.loading = true;
       var Data = this.food;
       Data.restau_id = this.restau_id;
       var url = window.Laravel.basePath + '/api/item/create';
@@ -1992,6 +2000,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$emit('newItemAdded', response.data, Data.category);
 
         _this.food = _this.emptyFoodItem();
+        _this.loading = false;
       }).catch(function (error) {
         if (error.response.status == 422) {
           _this.validation.setMessages(error.response.data.errors);
@@ -6605,7 +6614,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.add_new_retau {\r\n  cursor: pointer;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.add_new_retau {\r\n  cursor: pointer;\r\n  text-align: center;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -38041,7 +38050,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("template", { slot: "body" }, [
                     _vm._v(
-                      "\n        " + _vm._s(restau.location) + "\n        "
+                      "\n          " + _vm._s(restau.location) + "\n          "
                     ),
                     _c("br"),
                     _vm._v(" "),
@@ -38075,14 +38084,13 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("template", { slot: "body" }, [
-                      _c(
-                        "span",
-                        {
-                          staticClass: "add_new_retau",
-                          on: { click: _vm.handeLaAddNewRestau }
-                        },
-                        [_vm._v("+")]
-                      )
+                      _c("div", { staticClass: "add_new_retau" }, [
+                        _c("span", { on: { click: _vm.handeLaAddNewRestau } }, [
+                          _c("i", {
+                            staticClass: "fa fa-plus-circle fa-3x pointer"
+                          })
+                        ])
+                      ])
                     ])
                   ],
                   2
@@ -38278,7 +38286,14 @@ var render = function() {
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
           [_vm._v("save")]
-        )
+        ),
+        _vm._v(" "),
+        _vm.loading
+          ? _c("i", {
+              staticClass: "fa fa-spinner fa-spin",
+              staticStyle: { "font-size": "24px" }
+            })
+          : _vm._e()
       ]
     )
   ])
