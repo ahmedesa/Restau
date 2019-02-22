@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Auth;
 class RestauService
 {
 
-    public function UserRestoAndTables()
+    public function UserRestauAndTables()
     {
 
         return Auth::user()
-            ->resturants()
+            ->restaurants()
             ->get();
     }
 }

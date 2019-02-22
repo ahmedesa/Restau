@@ -28,7 +28,7 @@ class HomeController extends Controller
         
         $restau_id = 1;
         $menus= $service->GetMenuWithCategory($restau_id);
-        $restaus = $restService->UserRestoAndTables();
+        $restaus = $restService->UserRestauAndTables();
         return view('home',compact('menus','restau_id','restaus'));
     }
 }

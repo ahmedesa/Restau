@@ -5,7 +5,7 @@ namespace App\Rules;
 use App\Category;
 use Illuminate\Contracts\Validation\Rule;
 
-class RestoCategoryValidate implements Rule
+class RestauCategoryValidate implements Rule
 {
     private $restoId;
 

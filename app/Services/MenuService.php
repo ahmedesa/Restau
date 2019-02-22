@@ -9,9 +9,8 @@ class MenuService
     public function GetMenuWithCategory($restoId)
     {
 
-        $menuItems = Menu::where('restau_id', $restoId)
+        return Menu::where('restau_id', $restoId)
             ->get()
             ->groupBy('category.name');
-        return $menuItems;
     }
 }

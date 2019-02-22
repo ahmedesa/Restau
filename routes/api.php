@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('item/create', 'MenuController@store');
-    Route::post('restau/create', 'ResturantController@store');
+    Route::post('restau/create', 'RestaurantController@store');
 
 });

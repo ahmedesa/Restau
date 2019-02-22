@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Menu;
-use App\Rules\RestoCategoryValidate;
+use App\Rules\RestauCategoryValidate;
 use App\Services\MenuService;
 use Illuminate\Http\Request;
 
@@ -25,7 +25,7 @@ class MenuController extends Controller
             'price'       => 'required|numeric',
             'name'        => 'required',
             'description' => 'required',
-            'category'    => ['required', new RestoCategoryValidate($request->restau_id)],
+            'category'    => ['required', new RestauCategoryValidate($request->restau_id)],
         ]
         );
         $category = Category::where('restau_id',$data['restau_id'])->where('name',$data['category'])->first();

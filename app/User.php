@@ -38,8 +38,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function resturants()
+    public function restaurants()
     {
-        return $this->hasMany(Resturant::class,'owner_id')->orderBy('name','asc');
+        return $this->hasMany(Restaurant::class,'owner_id')->orderBy('name','asc');
     }
 }
